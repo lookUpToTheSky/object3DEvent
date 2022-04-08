@@ -1,0 +1,19 @@
+{
+  "name": "object3devent",
+  "version": "1.0.0",
+  "description": "three.js object3d event",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lookUpToTheSky/object3DEvent.git"
+  },
+  "author": "lookuptothesky",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lookUpToTheSky/object3DEvent/issues"
+  },
+  "homepage": "https://github.com/lookUpToTheSky/object3DEvent#readme"
+}
