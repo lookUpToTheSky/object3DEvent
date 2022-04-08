@@ -26,6 +26,7 @@ class Event {
         this.mouse = new Vector2()
         Object3D.prototype.on = this.object3DEvent
         Object3D.prototype.off = this.removeEvent
+        Object3D.prototype.offAll = this.removeAll
 
         element.addEventListener( 'mousedown', this.mouseEvent.bind(this, 'mousedown'), false );
 
@@ -42,7 +43,7 @@ class Event {
     object3DEvent(type, callBack, callBack1) {
         eventList.push({ type, callBack, callBack1, object: this})
     }
-    // 移除事件对象
+    // 移除object3D对象事件
     removeEvent(type) {
         let index = null
         eventList.forEach((ele, i) => {
@@ -56,6 +57,11 @@ class Event {
             console.warn("There is no method called '" + type + "';");
         }
     }
+    // 移除object3D对象的所有事件
+    removeAll() {
+        eventList = eventList.filter( ele => this.uuid === ele.object.uuid )
+    }
+
     //鼠标事件
     mouseEvent(clickType) {
 		event.preventDefault();
@@ -83,7 +89,6 @@ class Event {
             }
         }
     }
-
     //hover事件
     mouseHover() {
 		event.preventDefault();
@@ -127,7 +132,6 @@ class Event {
             lastObj = null
         }
     }
-
     // 获取事件对象
     getEventObj(target, list) {
         const uuid = [ target.uuid ]
@@ -147,21 +151,11 @@ class Event {
         this.height = this.element.clientHeight  
     }
 
-    // 移除所有事件
-    removeAll() {
+    // 清空
+    clear() {
         eventList = []
         lastObj = null
         lastTarget = null
-        
-        this.element.removeEventListener( 'mousedown', this.mouseEvent, false );
-
-        this.element.removeEventListener( 'mouseup', this.mouseEvent, false );
-
-        this.element.removeEventListener( 'click', this.mouseEvent, false );
-
-        this.element.removeEventListener( 'dblclick', this.mouseEvent, false );
-
-        this.element.removeEventListener( 'mousemove', this.hoverFun, false );
     }
 }
 

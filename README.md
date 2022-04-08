@@ -42,7 +42,7 @@
     //移除点击事件
     mesh.off('click');
     //移除所有事件
-    mesh.removeAll();
+    mesh.offAll();
 ```
 ### 事件元素大小变化，需要重置事件对象：
 ```objEvent.resize();```
