@@ -1,10 +1,10 @@
 #基于three.js的事件插件
 
 ###安装：
-```npm install object3DEvent --save```
+`npm install object3DEvent --save`
 
 ###引入：
-```import Event from 'object3DEvent'```
+`import Event from 'object3DEvent'`
 
 ###使用：
 ```
