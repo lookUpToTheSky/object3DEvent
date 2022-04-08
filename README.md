@@ -1,12 +1,12 @@
-#基于three.js的事件插件
+# 基于three.js的事件插件
 
-###安装：
+### 安装：
 `npm install object3DEvent --save`
 
-###引入：
+### 引入：
 `import Event from 'object3DEvent'`
 
-###使用：
+### 使用：
 ```
     //初始化事件对象，参数(element事件元素，camera 摄像机实例)
     const objEvent = new Event(element, camera);
@@ -44,5 +44,5 @@
     //移除所有事件
     mesh.removeAll();
 ```
-###事件元素大小变化，需要重置事件对象：
+### 事件元素大小变化，需要重置事件对象：
 ```objEvent.resize();```
