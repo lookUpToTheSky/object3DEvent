@@ -9,17 +9,17 @@ var eventList = [],
     lastTarget = null;
 
 class Event {
-    constructor(element, scene, camera) {
+    constructor(element, scene, camera, isRayAll = true) {
         if ( element === undefined ) {
-            console.error( 'Three parameters are required' ); 
+            console.error( 'Parameter element cannot be empty' ); 
             return;
         }
         if ( scene === undefined ) {
-            console.error( 'Three parameters are required' ); 
+            console.error( 'Parameter scene cannot be empty' ); 
             return;
         }
         if ( camera === undefined ) {
-            console.error( 'Three parameters are required' ); 
+            console.error( 'Parameter camera cannot be empty' ); 
             return;
         }
         this.element = element
@@ -27,6 +27,7 @@ class Event {
         this.height = element.clientHeight
         this.camera = camera
         this.scene = scene
+        this.isRayAll = isRayAll
         this.raycaster  = new Raycaster()
         this.mouse = new Vector2()
         Object3D.prototype.on = this.object3DEvent
@@ -75,8 +76,7 @@ class Event {
 
         this.mouse.x = (event.clientX / this.width) * 2 - 1;
         this.mouse.y = - (event.clientY / this.height) * 2 + 1;
-        // const list = eventList.map(item => item.object)
-        const list = this.scene.children
+        const list = this.isRayAll ? this.scene.children : eventList.map(item => item.object)
 
         // 通过摄像机和鼠标位置更新射线
         this.raycaster.setFromCamera( this.mouse, this.camera );
@@ -103,8 +103,7 @@ class Event {
 
         if(mouseHoverList.length === 0) return;
 
-        // const list = eventList.map(item => item.object)
-        const list = this.scene.children
+        const list = this.isRayAll ? this.scene.children : eventList.map(item => item.object)
 
         // 通过摄像机和鼠标位置更新射线
         this.raycaster.setFromCamera( this.mouse, this.camera );

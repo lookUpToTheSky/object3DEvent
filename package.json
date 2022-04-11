@@ -1,6 +1,6 @@
 {
   "name": "object3d-events",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "three.js object3d events",
   "main": "index.js",
   "scripts": {

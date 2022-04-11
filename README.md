@@ -8,8 +8,8 @@
 
 ### 使用：
 ```
-    //初始化事件对象，参数(element事件元素，scene场景实例， camera 摄像机实例)
-    const objEvent = new Event(element, scene, camera);
+    //初始化事件对象，参数(element事件元素，scene场景实例， camera 摄像机实例, isRayAll是否检测所有 默认true)
+    const objEvent = new Event(element, scene, camera, isRayAll);
 
     const mesh = new THREE.Mesh(
         new THREE.BoxGeometry( 10, 10, 10 ),
