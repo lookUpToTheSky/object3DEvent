@@ -8,8 +8,8 @@
 
 ### 使用：
 ```
-    //初始化事件对象，参数(element事件元素，camera 摄像机实例)
-    const objEvent = new Event(element, camera);
+    //初始化事件对象，参数(element事件元素，scene场景实例， camera 摄像机实例)
+    const objEvent = new Event(element, scene, camera);
 
     const mesh = new THREE.Mesh(
         new THREE.BoxGeometry( 10, 10, 10 ),
@@ -43,6 +43,9 @@
     mesh.off('click');
     //移除所有事件
     mesh.offAll();
+    
+    //事件元素大小变化，需要重置事件对象：
+    element.oresize = () => {
+        objEvent.resize();  
+    }
 ```
-### 事件元素大小变化，需要重置事件对象：
-```objEvent.resize();```

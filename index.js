@@ -9,19 +9,24 @@ var eventList = [],
     lastTarget = null;
 
 class Event {
-    constructor(element, camera) {
+    constructor(element, scene, camera) {
         if ( element === undefined ) {
-            console.error( 'Parameter element cannot be empty' ); 
+            console.error( 'Three parameters are required' ); 
+            return;
+        }
+        if ( scene === undefined ) {
+            console.error( 'Three parameters are required' ); 
             return;
         }
         if ( camera === undefined ) {
-            console.error( 'Parameter camera cannot be empty' ); 
+            console.error( 'Three parameters are required' ); 
             return;
         }
         this.element = element
         this.width = element.clientWidth
         this.height = element.clientHeight
         this.camera = camera
+        this.scene = scene
         this.raycaster  = new Raycaster()
         this.mouse = new Vector2()
         Object3D.prototype.on = this.object3DEvent
@@ -70,8 +75,8 @@ class Event {
 
         this.mouse.x = (event.clientX / this.width) * 2 - 1;
         this.mouse.y = - (event.clientY / this.height) * 2 + 1;
-
-        const list = mousedownList.map(item => item.object)
+        // const list = eventList.map(item => item.object)
+        const list = this.scene.children
 
         // 通过摄像机和鼠标位置更新射线
         this.raycaster.setFromCamera( this.mouse, this.camera );
@@ -98,7 +103,8 @@ class Event {
 
         if(mouseHoverList.length === 0) return;
 
-        const list = mouseHoverList.map(item => item.object)
+        // const list = eventList.map(item => item.object)
+        const list = this.scene.children
 
         // 通过摄像机和鼠标位置更新射线
         this.raycaster.setFromCamera( this.mouse, this.camera );
@@ -112,18 +118,17 @@ class Event {
 
             if( !!active && active.type === 'hover' ) {
                 if( lastObj === null || lastObj.object.uuid !== active.object.uuid ) {
-
                     if(lastObj !== null && lastObj.callBack1 !== undefined) lastObj.callBack1(lastObj.object, lastTarget)
-
                     lastObj = active
                     lastTarget = target
-
                     active.callBack(active.object, target)
 
                 }else if(lastObj.object.uuid !== active.object.uuid){
-
                     if(lastObj.callBack1 !== undefined) lastObj.callBack1(lastObj.object, lastTarget)
                 }
+            }else if( lastObj !== null ){
+                if(lastObj.callBack1 !== undefined) lastObj.callBack1(lastObj.object, lastTarget)
+                lastObj = null 
             }
         }else if( lastObj !== null ) {
 
